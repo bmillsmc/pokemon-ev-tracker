@@ -1,0 +1,10 @@
+Pokemon
+-name (unique)
+-species
+-atk
+-def
+-spe
+-spatk
+-spdef
+-hp
+-total evs (max of 512 (really 510 cause the extra 2 is discarded))
