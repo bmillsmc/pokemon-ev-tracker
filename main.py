@@ -28,7 +28,7 @@ db.create_tables([Pokemon])
 
 # - example code -
 
-aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
+aegislash = Pokemon.create(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
 # aegislash.save()
 # print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
 
@@ -38,9 +38,9 @@ aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, 
 
 def main_menu(menu_count): # where the user starts. will take a user input and call the appropriate function
     if menu_count == 0:
-        what_do = input("hello welcome to the pokemon ev tracker. what would you like to do? (list, create, increment, find)").lower()
+        what_do = input("hello welcome to the pokemon ev tracker. what would you like to do? (list, create, increment, find) ").lower().strip()
     else: 
-        what_do = input("what would you like to do? (list, create, increment, find)").lower()
+        what_do = input("what would you like to do? (list, create, increment, find, exit) ").lower().strip()
     menu_count += 1
     if what_do == "list":
         list_pokemon()
@@ -50,13 +50,17 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
     #     increment_pokemon()
     # elif what_do == "find":
     #     find_pokemon()
+    elif what_do == "exit" or what_do == "quit" or what_do == "q":
+        print("Quitting")
     else:
         print(f"Error: {what_do} is not a defined command. Please try again")
         main_menu(menu_count)
 
 def list_pokemon():
-    query = Pokemon.select()
-    print(query)
+    poke_list = Pokemon.get(Pokemon.species == "aegislash")
+    # poke_list = Pokemon.select()
+    # poke_list = list(query)
+    print(poke_list)
     main_menu(1)
 
 # def create_pokemon():
