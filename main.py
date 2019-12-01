@@ -44,8 +44,10 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
     menu_count += 1
     if what_do == "list":
         list_pokemon()
-    # elif what_do == "create":
-    #     create_pokemon()
+    elif what_do == "create":
+        name = input("what is the pokemon's name? (NOT SPECIES this is a nickname) ")
+        species = input("what is the pokemon's species? ")
+        create_pokemon(name, species)
     # elif what_do == "increment":
     #     increment_pokemon()
     # elif what_do == "find":
@@ -59,10 +61,16 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
 def list_pokemon():
     poke_list = Pokemon.select()
     for poke in poke_list:
-        print(f"{poke.id}: {poke.species} (\"{poke.name}\") - EVs: {poke.total_evs}")
+        print_pokemon(poke)
     main_menu(1)
 
-# def create_pokemon():
+def create_pokemon(name, species, atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0):
+    pokemon = Pokemon.create(name=name, species=species, atk=atk, defen=defen, spe=spe, spa=spa, spd=spd, hp=hp, total_evs=total_evs)
+    print("CREATED:")
+    print_pokemon(pokemon)
+
+def print_pokemon(poke):
+    print(f"{poke.id}: {poke.species} (\"{poke.name}\") - EVs: {poke.total_evs}")
 
 # def find_pokemon():
 
