@@ -28,7 +28,7 @@ db.create_tables([Pokemon])
 
 # - example code -
 
-# aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
+aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
 # aegislash.save()
 # print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
 
@@ -44,21 +44,25 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
     menu_count += 1
     if what_do == "list":
         list_pokemon()
-    elif what_do == "create":
-        create_pokemon()
-    elif what_do == "increment":
-        increment_pokemon()
-    elif what_do == "find":
-        find_pokemon()
+    # elif what_do == "create":
+    #     create_pokemon()
+    # elif what_do == "increment":
+    #     increment_pokemon()
+    # elif what_do == "find":
+    #     find_pokemon()
     else:
         print(f"Error: {what_do} is not a defined command. Please try again")
         main_menu(menu_count)
 
 def list_pokemon():
+    query = Pokemon.select()
+    print(query)
+    main_menu(1)
 
-def create_pokemon():
+# def create_pokemon():
 
-def find_pokemon():
+# def find_pokemon():
 
-def increment_pokemon():
+# def increment_pokemon():
 
+main_menu(0)
