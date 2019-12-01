@@ -1,6 +1,8 @@
 from peewee import *
 from datetime import date
+
 # run this with pipenv run python3 main.py or using python3 in the pipenv shell
+# run settings.sql in the psql wiht \i settings.sql first to create the database (smh)
 
 db = PostgresqlDatabase("pokemon", user="postgres", password="", host="localhost", port="5432")
 
@@ -25,4 +27,7 @@ db.create_tables([Pokemon])
 
 aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
 aegislash.save()
+print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
+
+aegislash.total_evs += 2
 print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
