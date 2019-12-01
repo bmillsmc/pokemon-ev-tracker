@@ -25,9 +25,40 @@ db.connect()
 db.drop_tables([Pokemon])
 db.create_tables([Pokemon])
 
-aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
-aegislash.save()
-print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
 
-aegislash.total_evs += 2
-print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
+# - example code -
+
+# aegislash = Pokemon(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
+# aegislash.save()
+# print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
+
+# aegislash.total_evs += 2
+# print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
+
+
+def main_menu(menu_count): # where the user starts. will take a user input and call the appropriate function
+    if menu_count == 0:
+        what_do = input("hello welcome to the pokemon ev tracker. what would you like to do? (list, create, increment, find)").lower()
+    else: 
+        what_do = input("what would you like to do? (list, create, increment, find)").lower()
+    menu_count += 1
+    if what_do == "list":
+        list_pokemon()
+    elif what_do == "create":
+        create_pokemon()
+    elif what_do == "increment":
+        increment_pokemon()
+    elif what_do == "find":
+        find_pokemon()
+    else:
+        print(f"Error: {what_do} is not a defined command. Please try again")
+        main_menu(menu_count)
+
+def list_pokemon():
+
+def create_pokemon():
+
+def find_pokemon():
+
+def increment_pokemon():
+
