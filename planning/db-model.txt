@@ -8,3 +8,15 @@ Pokemon
 -spdef
 -hp
 -total evs (max of 512 (really 510 cause the extra 2 is discarded))
+
+
+- a user should be able to create a new pokemon, which starts at zero evs (because you wouldnt track one with evs on it). 
+
+- A user should be able to see a list of the pokemon in the db
+
+- they should be able to find a pokemon by name
+
+- they should be able to increment each stat and that should always increment the total evs until the total reaches 512 in which case they wont be able to add any more.
+
+bonus goals:
+they should be able to find a list of pokemon by species
