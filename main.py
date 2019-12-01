@@ -57,10 +57,9 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
         main_menu(menu_count)
 
 def list_pokemon():
-    poke_list = Pokemon.get(Pokemon.species == "aegislash")
-    # poke_list = Pokemon.select()
-    # poke_list = list(query)
-    print(poke_list)
+    poke_list = Pokemon.select()
+    for poke in poke_list:
+        print(f"{poke.id}: {poke.species} (\"{poke.name}\") - EVs: {poke.total_evs}")
     main_menu(1)
 
 # def create_pokemon():
