@@ -74,6 +74,8 @@ def print_pokemon(poke):
     print(f"{poke.id}: {poke.species} (\"{poke.name}\") - EVs: {poke.total_evs}")
 
 def check_for_poke(poke):
+    if poke == "EXIT":
+        return False
     poke_list = Pokemon.select()
     poke_names = []
     for pokemon in poke_list:
@@ -90,6 +92,7 @@ def find_pokemon():
         pokemon = Pokemon.get(Pokemon.name == poke_name)
         print("FOUND:")
         print_pokemon(pokemon)
+        return pokemon
         main_menu(1)
     elif poke_name != "EXIT":
         print("Error: pokemon does not exist")
@@ -99,6 +102,56 @@ def find_pokemon():
         main_menu(1)
     
 
-# def increment_pokemon():
+def increment_pokemon():
+    continue_inc = True
+    while continue_inc == True:
+        incre_loop()
+        answer = input("Would you like to stop adding evs? (y/n) ").lower().strip()
+        if answer == "y" or answer == "yes":
+            continue_inc = False
+        
+    
+def incre_loop():
+    pokemon = find_pokemon()
+    stat_increase = False
+    while stat_increase == False or stat_increase != "EXIT":
+        stat_increase = increase_stat(pokemon)
+
+
+def increase_stat(pokemon):
+    stat = input("What stat will you increase? (atk, defen, spe, spa, spd, hp) or type exit to leave" ).lower().strip()
+    amount = int(input("How many evs should be added? ").strip()) 
+    if pokemon.total_evs + amount > 512:
+        print("That exceeds the ev limit of 512")
+        return "EXIT"
+    elif stat == "atk": # pull keys and put them in a list and do an in conditional to shorten this
+        pokemon.atk += amount
+        pokemon.total_evs += amount
+        pokemon.save()
+    elif stat == "defen":
+        pokemon.defen += amount
+        pokemon.total_evs += amount
+        pokemon.save()
+    elif stat == "spe":
+        pokemon.spe += amount
+        pokemon.total_evs += amount
+        pokemon.save()
+    elif stat == "spa":
+        pokemon.spa += amount
+        pokemon.total_evs += amount
+        pokemon.save()
+    elif stat == "spd":
+        pokemon.spd += amount
+        pokemon.total_evs += amount
+        pokemon.save()
+    elif stat == "hp":
+        pokemon.hp += amount
+        pokemon.total_evs += amount
+        pokemon.save()
+    elif stat == "exit":
+        return "EXIT"
+    else:
+        print(f"Error: {stat} is not a stat")
+        return False
 
 main_menu(0)
