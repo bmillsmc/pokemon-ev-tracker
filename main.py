@@ -50,8 +50,8 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
         create_pokemon(name, species)
     # elif what_do == "increment":
     #     increment_pokemon()
-    # elif what_do == "find":
-    #     find_pokemon()
+    elif what_do == "find":
+        find_pokemon()
     elif what_do == "exit" or what_do == "quit" or what_do == "q":
         print("Quitting")
     else:
@@ -68,11 +68,36 @@ def create_pokemon(name, species, atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, tot
     pokemon = Pokemon.create(name=name, species=species, atk=atk, defen=defen, spe=spe, spa=spa, spd=spd, hp=hp, total_evs=total_evs)
     print("CREATED:")
     print_pokemon(pokemon)
+    main_menu(1)
 
 def print_pokemon(poke):
     print(f"{poke.id}: {poke.species} (\"{poke.name}\") - EVs: {poke.total_evs}")
 
-# def find_pokemon():
+def check_for_poke(poke):
+    poke_list = Pokemon.select()
+    poke_names = []
+    for pokemon in poke_list:
+        poke_names.append(pokemon.name)
+
+    if poke in poke_names:
+        return True
+    return False
+
+def find_pokemon():
+    poke_name = input("Please enter pokemon name or type EXIT to go to main menu: ")
+    check = check_for_poke(poke_name)
+    if check == True:
+        pokemon = Pokemon.get(Pokemon.name == poke_name)
+        print("FOUND:")
+        print_pokemon(pokemon)
+        main_menu(1)
+    elif poke_name != "EXIT":
+        print("Error: pokemon does not exist")
+        find_pokemon()
+    else:
+        print("returning to main menu")
+        main_menu(1)
+    
 
 # def increment_pokemon():
 
