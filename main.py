@@ -48,12 +48,14 @@ def main_menu(menu_count): # where the user starts. will take a user input and c
         name = input("what is the pokemon's name? (NOT SPECIES this is a nickname) ")
         species = input("what is the pokemon's species? ")
         create_pokemon(name, species)
-    # elif what_do == "increment":
-    #     increment_pokemon()
+    elif what_do == "increment":
+        increment_pokemon()
     elif what_do == "find":
         find_pokemon()
+        main_menu(menu_count)
     elif what_do == "exit" or what_do == "quit" or what_do == "q":
         print("Quitting")
+        exit()
     else:
         print(f"Error: {what_do} is not a defined command. Please try again")
         main_menu(menu_count)
@@ -93,7 +95,7 @@ def find_pokemon():
         print("FOUND:")
         print_pokemon(pokemon)
         return pokemon
-        main_menu(1)
+        
     elif poke_name != "EXIT":
         print("Error: pokemon does not exist")
         find_pokemon()
@@ -103,52 +105,72 @@ def find_pokemon():
     
 
 def increment_pokemon():
+    pokemon = find_pokemon()
     continue_inc = True
     while continue_inc == True:
-        incre_loop()
+        incre_loop(pokemon)
         answer = input("Would you like to stop adding evs? (y/n) ").lower().strip()
         if answer == "y" or answer == "yes":
             continue_inc = False
+    
+    main_menu(1)
         
     
-def incre_loop():
-    pokemon = find_pokemon()
+def incre_loop(pokemon):
     stat_increase = False
-    while stat_increase == False or stat_increase != "EXIT":
+    while stat_increase == False and stat_increase != "EXIT":
         stat_increase = increase_stat(pokemon)
 
 
 def increase_stat(pokemon):
-    stat = input("What stat will you increase? (atk, defen, spe, spa, spd, hp) or type exit to leave" ).lower().strip()
+    stat = input("What stat will you increase? (atk, defen, spe, spa, spd, hp) or type exit to leave ").lower().strip()
     amount = int(input("How many evs should be added? ").strip()) 
     if pokemon.total_evs + amount > 512:
         print("That exceeds the ev limit of 512")
         return "EXIT"
     elif stat == "atk": # pull keys and put them in a list and do an in conditional to shorten this
+        print(f"adding {amount} evs to atk")
         pokemon.atk += amount
         pokemon.total_evs += amount
         pokemon.save()
+        return amount
     elif stat == "defen":
+        print(f"adding {amount} evs to defen")
         pokemon.defen += amount
         pokemon.total_evs += amount
+        print(f"total evs: {pokemon.total_evs}")
         pokemon.save()
+        return amount
     elif stat == "spe":
+        print(f"adding {amount} evs to spe")
         pokemon.spe += amount
         pokemon.total_evs += amount
+        print(f"total evs: {pokemon.total_evs}")
         pokemon.save()
+        return amount
     elif stat == "spa":
+        print(f"adding {amount} evs to spa")
         pokemon.spa += amount
         pokemon.total_evs += amount
+        print(f"total evs: {pokemon.total_evs}")
         pokemon.save()
+        return amount
     elif stat == "spd":
+        print(f"adding {amount} evs to spd")
         pokemon.spd += amount
         pokemon.total_evs += amount
+        print(f"total evs: {pokemon.total_evs}")
         pokemon.save()
+        return amount
     elif stat == "hp":
+        print(f"adding {amount} evs to hp")
         pokemon.hp += amount
         pokemon.total_evs += amount
+        print(f"total evs: {pokemon.total_evs}")
         pokemon.save()
+        return amount
     elif stat == "exit":
+        print("exiting")
         return "EXIT"
     else:
         print(f"Error: {stat} is not a stat")
