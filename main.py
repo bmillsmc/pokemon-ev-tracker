@@ -29,12 +29,6 @@ db.create_tables([Pokemon])
 # - example code -
 
 aegislash = Pokemon.create(name="firstaegislash", species="aegislash", atk=0, defen=0, spe=0, spa=0, spd=0, hp=0, total_evs=0)
-# aegislash.save()
-# print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
-
-# aegislash.total_evs += 2
-# print(f"{aegislash.id}: {aegislash.species} (\"{aegislash.name}\") - EVs: {aegislash.total_evs}")
-
 
 def main_menu(menu_count): # where the user starts. will take a user input and call the appropriate function
     if menu_count == 0:
